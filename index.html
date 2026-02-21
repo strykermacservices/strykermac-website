@@ -18,6 +18,169 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* USE CASES SECTION */
+        .uc-industry-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        @media (max-width: 900px) { .uc-industry-grid { grid-template-columns: 1fr; } }
+
+        .uc-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+        }
+        .uc-card-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .uc-card-icon { font-size: 28px; margin-bottom: 10px; }
+        .uc-card-industry {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .uc-card-hvac .uc-card-industry { color: #0ea5e9; }
+        .uc-card-collections .uc-card-industry { color: #ef4444; }
+        .uc-card-realestate .uc-card-industry { color: #8b5cf6; }
+        .uc-card h3 { font-size: 18px; font-weight: 700; color: #0d1117; margin: 0; }
+        .uc-card-body { padding: 20px 24px; flex: 1; }
+        .uc-card-body p { font-size: 14px; color: #555; margin-bottom: 16px; line-height: 1.6; }
+        .uc-stats-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .uc-mini-stat { flex: 1; min-width: 60px; }
+        .uc-mini-stat-num {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0d1117;
+            line-height: 1;
+        }
+        .uc-card-hvac .uc-mini-stat-num { color: #0ea5e9; }
+        .uc-card-collections .uc-mini-stat-num { color: #ef4444; }
+        .uc-card-realestate .uc-mini-stat-num { color: #8b5cf6; }
+        .uc-mini-stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            font-weight: 600;
+        }
+        .uc-card-footer {
+            padding: 16px 24px;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+        }
+        .uc-roi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 999px;
+        }
+        .uc-card-hvac .uc-roi-badge { background: #e0f2fe; color: #0369a1; }
+        .uc-card-collections .uc-roi-badge { background: #fee2e2; color: #b91c1c; }
+        .uc-card-realestate .uc-roi-badge { background: #ede9fe; color: #6d28d9; }
+
+        /* MASTER SUMMARY STRIP */
+        .uc-master {
+            background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
+            border-radius: 16px;
+            padding: 40px 44px;
+            margin-bottom: 32px;
+            color: #fff;
+        }
+        .uc-master-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #00d4ff;
+            margin-bottom: 8px;
+        }
+        .uc-master h3 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+        .uc-master-sub {
+            font-size: 15px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
+        }
+        .uc-master-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+        @media (max-width: 800px) { .uc-master-stats { grid-template-columns: repeat(2, 1fr); } }
+        .uc-master-stat {}
+        .uc-master-stat-num {
+            font-size: 36px;
+            font-weight: 800;
+            color: #00d4ff;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .uc-master-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+        }
+        .uc-quote {
+            border-top: 1px solid rgba(255,255,255,0.12);
+            padding-top: 24px;
+            font-size: 16px;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
+        }
+
+        /* BEFORE/AFTER STRIP */
+        .uc-ba-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1.5px solid #e5e7eb;
+        }
+        @media (max-width: 640px) { .uc-ba-strip { grid-template-columns: 1fr; } }
+        .uc-ba-before, .uc-ba-after { padding: 24px 28px; }
+        .uc-ba-before { background: #fff8f8; border-right: 1.5px solid #e5e7eb; }
+        .uc-ba-after { background: #f8fff9; }
+        .uc-ba-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .uc-ba-before .uc-ba-label { color: #c0392b; }
+        .uc-ba-after .uc-ba-label { color: #16a34a; }
+        .uc-ba-list { list-style: none; }
+        .uc-ba-list li { font-size: 14px; color: #333; padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .uc-ba-list li:last-child { border-bottom: none; }
+        .uc-ba-before .uc-ba-list li::before { content: '✗ '; color: #c0392b; font-weight: 700; }
+        .uc-ba-after .uc-ba-list li::before { content: '⚡ '; color: #16a34a; }
+    </style>
 </head>
 <body>
     <!-- NAV -->
@@ -29,6 +192,7 @@
             <div class="nav-links" id="navLinks">
                 <a href="#services">Services</a>
                 <a href="#how-it-works">Process</a>
+                <a href="#use-cases">Use Cases</a>
                 <a href="#case-study">Case Study</a>
                 <a href="#pricing">Pricing</a>
                 <a href="#faq">FAQ</a>
@@ -133,8 +297,164 @@
         </div>
     </section>
 
+    <!-- USE CASES -->
+    <section class="section" id="use-cases">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag"><span class="code-accent">&lt;</span> Use Cases <span class="code-accent">/&gt;</span></span>
+                <h2>Real Industries. Real Numbers.</h2>
+                <p class="section-sub">Three industries. Side-by-side breakdowns of what your team does manually today versus what an AI agent handles automatically — with every hour and dollar shown.</p>
+            </div>
+
+            <!-- INDUSTRY CARDS -->
+            <div class="uc-industry-grid">
+
+                <!-- HVAC -->
+                <div class="uc-card uc-card-hvac fade-in">
+                    <div class="uc-card-header">
+                        <div class="uc-card-icon">🔧</div>
+                        <div class="uc-card-industry">HVAC</div>
+                        <h3>Work Order & Dispatch Automation</h3>
+                    </div>
+                    <div class="uc-card-body">
+                        <p>78% of customers hire the first company that responds. AI handles every inbound call — work orders created instantly, tech dispatched in under 60 seconds, customer texts sent automatically.</p>
+                        <div class="uc-stats-row">
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">23</div>
+                                <div class="uc-mini-stat-label">Tasks automated</div>
+                            </div>
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">0 min</div>
+                                <div class="uc-mini-stat-label">Weekly clerk time</div>
+                            </div>
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">$80K+</div>
+                                <div class="uc-mini-stat-label">Revenue recovered</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uc-card-footer">
+                        <span class="uc-roi-badge">📈 38× ROI · 9-day payback</span>
+                    </div>
+                </div>
+
+                <!-- COLLECTIONS -->
+                <div class="uc-card uc-card-collections fade-in">
+                    <div class="uc-card-header">
+                        <div class="uc-card-icon">📋</div>
+                        <div class="uc-card-industry">Collections</div>
+                        <h3>Account Management & Compliance</h3>
+                    </div>
+                    <div class="uc-card-body">
+                        <p>AI makes 18,000 compliant contact attempts per month versus 1,200 for a human agent — while automatically logging every interaction, generating letters, and flagging disputes before they become FDCPA violations.</p>
+                        <div class="uc-stats-row">
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">31</div>
+                                <div class="uc-mini-stat-label">Tasks automated</div>
+                            </div>
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">+52%</div>
+                                <div class="uc-mini-stat-label">Recovery rate</div>
+                            </div>
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">Zero</div>
+                                <div class="uc-mini-stat-label">FDCPA violations</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uc-card-footer">
+                        <span class="uc-roi-badge">📈 63× ROI · 4-day payback</span>
+                    </div>
+                </div>
+
+                <!-- REAL ESTATE -->
+                <div class="uc-card uc-card-realestate fade-in">
+                    <div class="uc-card-header">
+                        <div class="uc-card-icon">🏡</div>
+                        <div class="uc-card-industry">Real Estate</div>
+                        <h3>Transaction Coordination & Lead Response</h3>
+                    </div>
+                    <div class="uc-card-body">
+                        <p>The industry average response time to a buyer inquiry is 15 hours. An AI agent responds in under 60 seconds — then handles all 47 tasks per transaction automatically, from listing to closing.</p>
+                        <div class="uc-stats-row">
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">47</div>
+                                <div class="uc-mini-stat-label">Tasks per deal</div>
+                            </div>
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">180 hrs</div>
+                                <div class="uc-mini-stat-label">Freed annually</div>
+                            </div>
+                            <div class="uc-mini-stat">
+                                <div class="uc-mini-stat-num">+2–3</div>
+                                <div class="uc-mini-stat-label">Extra closings</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uc-card-footer">
+                        <span class="uc-roi-badge">📈 19× ROI · 1-deal payback</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- BEFORE / AFTER -->
+            <div class="uc-ba-strip fade-in">
+                <div class="uc-ba-before">
+                    <div class="uc-ba-label">❌ Without AI</div>
+                    <ul class="uc-ba-list">
+                        <li>Work orders created next morning, maybe</li>
+                        <li>Documents take 45 minutes to draft</li>
+                        <li>Follow-ups forgotten 30% of the time</li>
+                        <li>After-hours calls go unanswered</li>
+                        <li>Compliance is human — variable and risky</li>
+                        <li>Your team's day: typing, copying, chasing paperwork</li>
+                    </ul>
+                </div>
+                <div class="uc-ba-after">
+                    <div class="uc-ba-label">✅ With AI Agent</div>
+                    <ul class="uc-ba-list">
+                        <li>Work orders created instantly, 24/7</li>
+                        <li>Documents drafted in under 90 seconds</li>
+                        <li>Every follow-up automated — never missed</li>
+                        <li>Every call answered, logged, and routed</li>
+                        <li>100% scripted compliance — zero drift</li>
+                        <li>Your team's day: revenue, clients, growth</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MASTER SUMMARY -->
+            <div class="uc-master fade-in">
+                <div class="uc-master-label">Cross-Industry Impact</div>
+                <h3>7,093 Hours a Year. Gone. Day One.</h3>
+                <p class="uc-master-sub">Annualized clerical automation impact across HVAC, Collections, and Real Estate — based on industry benchmarks and BLS wage data.</p>
+                <div class="uc-master-stats">
+                    <div class="uc-master-stat">
+                        <div class="uc-master-stat-num">7,093</div>
+                        <div class="uc-master-stat-label">Hours automated per year</div>
+                    </div>
+                    <div class="uc-master-stat">
+                        <div class="uc-master-stat-num">$163K</div>
+                        <div class="uc-master-stat-label">Annual wages saved</div>
+                    </div>
+                    <div class="uc-master-stat">
+                        <div class="uc-master-stat-num">3.5×</div>
+                        <div class="uc-master-stat-label">FTE equivalent replaced</div>
+                    </div>
+                    <div class="uc-master-stat">
+                        <div class="uc-master-stat-num">$500</div>
+                        <div class="uc-master-stat-label">Monthly agent cost</div>
+                    </div>
+                </div>
+                <p class="uc-quote">"A business owner who sees $163,000 in annual savings and says 'let me think about it' — is paying $163,000 to think."</p>
+            </div>
+
+        </div>
+    </section>
+
     <!-- CASE STUDY -->
-    <section class="section" id="case-study">
+    <section class="section section-alt" id="case-study">
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag"><span class="code-accent">&lt;</span> Case Study <span class="code-accent">/&gt;</span></span>
