@@ -692,10 +692,9 @@
                         <a href="sms:8106202438" class="btn btn-ghost btn-full">Send a Text</a>
                     </div>
                 </div>
-                <form class="contact-form fade-in" action="https://formsubmit.co/strykermacservices@gmail.com" method="POST">
-                    <input type="hidden" name="_subject" value="New inquiry from StrykerMac website">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="#">
+                <form class="contact-form fade-in" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact">
+                    <p style="display:none"><input name="bot-field"></p>
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required placeholder="Your name">
