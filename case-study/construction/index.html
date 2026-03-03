@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Case Study: AI Lead Capture — StrykerMac Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(45deg, rgba(0, 100, 255, 0.1), rgba(0, 200, 255, 0.05));
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 100, 255, 0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .industry-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .brand {
+            color: #00d4ff;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 100, 255, 0.2);
+        }
+
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+        .section:nth-child(6) { animation-delay: 1s; }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .problem-icon {
+            color: #ff4444;
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .solution-icon {
+            color: #00d4ff;
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+            color: #c0c0c0;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .problem-list, .solution-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-list li {
+            padding: 15px 20px;
+            border-left: 3px solid #ff4444;
+            margin-bottom: 15px;
+            background: rgba(255, 68, 68, 0.1);
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .solution-list li {
+            padding: 15px 20px;
+            border-left: 3px solid #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.05));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: scale(1.05);
+        }
+
+        .metric {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .metric-desc {
+            color: #c0c0c0;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        .company-highlight {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(247, 147, 30, 0.1));
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .company-highlight h3 {
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #ffaa00;
+            text-align: center;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.1), rgba(255, 170, 0, 0.05));
+            border-left: 4px solid #ffaa00;
+            border-radius: 10px;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            color: rgba(255, 170, 0, 0.3);
+        }
+
+        .quote-attribution {
+            font-size: 1rem;
+            color: #c0c0c0;
+            margin-top: 20px;
+            font-style: normal;
+        }
+
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            font-size: 1.3rem;
+            margin-top: 20px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ffaa00;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffaa00, #ff8800);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 20px 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 170, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 170, 0, 0.5);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quote {
+                padding: 30px 20px;
+            }
+
+            .quote::before {
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../universal-pitch.html" class="back-link">← Back to Main Pitch</a>
+        
+        <div class="hero">
+            <div class="industry-badge">🔨 CONSTRUCTION CASE STUDY</div>
+            <h1>How Construction Companies Capture Every Lead with <span class="brand">AI</span></h1>
+        </div>
+
+        <div class="section">
+            <h2>The Problem</h2>
+            <p>A Michigan construction company was struggling with lead generation and customer communication:</p>
+            <ul class="problem-list">
+                <li>
+                    <span class="problem-icon">💻</span>
+                    <div>
+                        <strong>Website generates zero leads</strong><br>
+                        Professional website with no contact forms, chat, or clear call-to-action
+                    </div>
+                </li>
+                <li>
+                    <span class="problem-icon">📞</span>
+                    <div>
+                        <strong>Missed calls on job sites</strong><br>
+                        Can't answer phone while operating equipment or managing crews
+                    </div>
+                </li>
+                <li>
+                    <span class="problem-icon">📝</span>
+                    <div>
+                        <strong>No follow-up system</strong><br>
+                        Leads from referrals and word-of-mouth just disappeared without proper nurturing
+                    </div>
+                </li>
+                <li>
+                    <span class="problem-icon">💼</span>
+                    <div>
+                        <strong>Inconsistent communication</strong><br>
+                        No standardized process for project inquiries, estimates, or client updates
+                    </div>
+                </li>
+            </ul>
+
+            <div class="company-highlight">
+                <h3>Beck Building Style Challenge</h3>
+                <p>Just like Paul's situation - great reputation, quality work, but struggling to systematically capture and convert website visitors into paying customers.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>The AI Solution</h2>
+            <p>StrykerMac Services implemented a comprehensive AI system that transformed their lead generation:</p>
+            <ul class="solution-list">
+                <li>
+                    <span class="solution-icon">🌐</span>
+                    <div>
+                        <strong>Website visitor qualification</strong><br>
+                        AI chat captures visitor info and project details before they leave the site
+                    </div>
+                </li>
+                <li>
+                    <span class="solution-icon">🏗️</span>
+                    <div>
+                        <strong>Project inquiry handling</strong><br>
+                        Pre-qualifies projects by budget, timeline, and scope before estimate requests
+                    </div>
+                </li>
+                <li>
+                    <span class="solution-icon">📅</span>
+                    <div>
+                        <strong>Automated estimate scheduling</strong><br>
+                        Books site visits and estimate appointments directly into calendar
+                    </div>
+                </li>
+                <li>
+                    <span class="solution-icon">📲</span>
+                    <div>
+                        <strong>Job site call handling</strong><br>
+                        AI answers calls, takes messages, and schedules callbacks when you're busy
+                    </div>
+                </li>
+                <li>
+                    <span class="solution-icon">🔄</span>
+                    <div>
+                        <strong>Persistent follow-up</strong><br>
+                        Nurtures leads through project timeline, sends updates, and re-engages cold prospects
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Real Results</h2>
+            <p>The transformation was immediate and measurable:</p>
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="metric">0 → Automated</span>
+                    <div class="metric-label">Website Leads</div>
+                    <div class="metric-desc">From zero website conversions to systematic lead capture</div>
+                </div>
+                <div class="result-card">
+                    <span class="metric">40%</span>
+                    <div class="metric-label">More Estimates</div>
+                    <div class="metric-desc">Increase in qualified estimate appointments</div>
+                </div>
+                <div class="result-card">
+                    <span class="metric">24/7</span>
+                    <div class="metric-label">Call Coverage</div>
+                    <div class="metric-desc">Never miss another project inquiry</div>
+                </div>
+                <div class="result-card">
+                    <span class="metric">85%</span>
+                    <div class="metric-label">Lead Quality</div>
+                    <div class="metric-desc">Pre-qualified leads show up ready to hire</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote">
+            Now my website actually works for my business. I'm getting qualified leads while I'm on the job site, and my AI handles all the initial questions so I only talk to serious buyers.
+            <div class="quote-attribution">— Mike B., Beck Building Construction</div>
+        </div>
+
+        <div class="cta">
+            <h2>Ready to Transform Your Construction Business?</h2>
+            <p>Stop missing website leads and job site calls. Start capturing every opportunity with AI.</p>
+            
+            <a href="tel:+18106202438" class="cta-button">📞 Call Now</a>
+            <a href="mailto:strykermacservices@gmail.com" class="cta-button">✉️ Get Started</a>
+            
+            <div class="contact-info">
+                <p><strong>Phone:</strong> <a href="tel:+18106202438">(810) 620-2438</a></p>
+                <p><strong>Email:</strong> <a href="mailto:strykermacservices@gmail.com">strykermacservices@gmail.com</a></p>
+                <p><strong>Web:</strong> strykermacservices.services</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for mobile
+        document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Add entrance animations to sections as they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add subtle parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+    </script>
+</body>
+</html>
